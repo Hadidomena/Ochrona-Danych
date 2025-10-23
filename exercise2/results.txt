@@ -1,0 +1,11 @@
+=== Exercise 1: Password Entropy ===
+Time: 0.00s
+Result: 55 characters needed for 256-bit entropy
+
+=== Exercise 2: AES-ECB Brute Force ===
+Time: 0.02s
+Key found: s (repeated 16 times)
+Method: Template attack on BMP header
+
+=== Advanced Attack Demonstration ===
+Time: 0.03s

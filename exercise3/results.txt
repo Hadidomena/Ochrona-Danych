@@ -1,0 +1,13 @@
+=== Czesc 1: Kolizja MD5 ===
+Time: 0.01s
+Haslo 1: pass862
+Haslo 2: pass4708
+Prefix: b75278
+
+=== Czesc 2: Atak slownikowy ===
+MD5-crypt: alibaba (5.55s)
+SHA256-crypt: italy (79.98s)
+Argon2: 1951 (403.79s)
+MD5-crypt+pepper: maryannd (174.45s)
+
+Total cracking time: 663.77s

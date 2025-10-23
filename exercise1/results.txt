@@ -1,0 +1,10 @@
+=== PART 1: Cyclical Cipher Analysis ===
+Time: 1.56s
+english: shift=19, chi^2=0.65
+french: shift=1, chi^2=1.87
+polish: shift=23, chi^2=2.99
+
+=== PART 2: RC4 Brute Force Analysis ===
+Time: 14.50s
+crypto.rc4: key=def, entropy=4.46
+crypto2.rc4: key=eac, entropy=4.29
