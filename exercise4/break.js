@@ -42,7 +42,7 @@ const server = http.createServer((req, res) => {
         console.log('[Node] Exfiltrated data received:');
         fs.writeFileSync('results.txt', decodeURIComponent(data));
         console.log('[Node] Data saved to results.txt.');
-        res.writeHead(204); // No content
+        res.writeHead(204);
         res.end();
         server.close(() => console.log('[Node] Server shut down.'));
     }
