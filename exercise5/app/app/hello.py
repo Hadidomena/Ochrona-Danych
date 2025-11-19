@@ -24,13 +24,18 @@ def user_loader(username):
 
     db = sqlite3.connect(DATABASE)
     sql = db.cursor()
+    """
+    Original unsafe way 
+
     sql.execute(f"SELECT username, password FROM user WHERE username = '{username}'")
+    """
+    sql.execute("SELECT username, password FROM user WHERE username = ?", (username,))
+    
     row = sql.fetchone()
     try:
         username, password = row
     except:
         return None
-
     user = User()
     user.id = username
     user.password = password
