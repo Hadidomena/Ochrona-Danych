@@ -26,11 +26,10 @@ def user_loader(username):
     sql = db.cursor()
     """
     Original unsafe way 
-
+    
     sql.execute(f"SELECT username, password FROM user WHERE username = '{username}'")
     """
     sql.execute("SELECT username, password FROM user WHERE username = ?", (username,))
-    
     row = sql.fetchone()
     try:
         username, password = row
@@ -94,7 +93,13 @@ def render():
     username = current_user.id
     db = sqlite3.connect(DATABASE)
     sql = db.cursor()
+
+    """
+    Original unsafe way 
+
     sql.execute(f"INSERT INTO notes (username, note) VALUES ('{username}', '{rendered}')")
+    """
+    sql.execute("INSERT INTO notes (username, note) VALUES (?, ?)", (username, rendered))
     db.commit()
     return render_template("markdown.html", rendered=rendered)
 

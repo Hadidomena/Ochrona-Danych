@@ -1,4 +1,7 @@
-# Zestaw B
+# Task Group B
+## Task
+- log into app by sql injection
+
 ## First step - Think
 - try SQL injection by username
 - it may be done, by starting with ', then inserting payload and ending with -- for example
@@ -25,11 +28,33 @@ and it did log in! but username was magical, can I do it without knowing usernam
 and it did work, incredible
 
 ## Step Four - Protect
+This vulnerability can be patched up by changing
+sql.execute(f"SELECT username, password FROM user WHERE username = '{username}'")
+to safer
+sql.execute("SELECT username, password FROM user WHERE username = ?", (username,)) 
 
 ## Step Five - Rejoice
 - all done, good job :smiley:
 
-# Zestaw A
+# Task Group A
+## Tasks
+- Get version of SQLite
+- add note to different user
 
-## First step
-- Proceed with decoding password
+## Way in 
+- I can use rendered markdown to get in, especially this insert
+"INSERT INTO notes (username, note) VALUES ('{username}', '{rendered}')"
+
+## First task
+- Proceed with getting sql version 
+maybe something like
+'), ('bach', (Select sqlite_version())), ('bach', '
+AAAAND IT DID WORK!
+version is 3.38.4
+
+## Second task
+- easy we can just replace bach with bob, for example
+'), ('bob', 'Note implicating in crimes agains the republic'), ('bob', 'Thus spoke Zarathustra
+
+## Fix of the way in
+Similar to Task Group B, replace
