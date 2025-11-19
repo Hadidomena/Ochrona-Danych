@@ -2,6 +2,10 @@
 ## Task
 - log into app by sql injection
 
+## Way in
+- I can get in through 
+sql.execute(f"SELECT username, password FROM user WHERE username = '{username}'")
+
 ## First step - Think
 - try SQL injection by username
 - it may be done, by starting with ', then inserting payload and ending with -- for example
@@ -58,3 +62,6 @@ version is 3.38.4
 
 ## Fix of the way in
 Similar to Task Group B, replace
+sql.execute(f"INSERT INTO notes (username, note) VALUES ('{username}', '{rendered}')")
+with
+sql.execute("INSERT INTO notes (username, note) VALUES (?, ?)", (username, rendered))
