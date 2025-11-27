@@ -10,6 +10,10 @@ Incorrect: Expected failure - 400: Ciphertext with incorrect length.
 ```
 # Second Part
 ## Task A
+1. add two users with keys,
+2. encrypt their messages with partners keys,
+3. send and display received messages
+4. rejoice
 **Output**
 ```
 SUCCESS: Dodano klucz dla: alice
