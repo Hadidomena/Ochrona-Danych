@@ -58,8 +58,8 @@ def task2a_bidirectional_communication(user1_id, user2_id):
     client.send_key(user2_id, public_key2)
 
     message1to2 = b"Hello from User1 to User2"
-    pub_key2 = RSA.import_key(client.get_key(user2_id))
-    cipher = PKCS1_OAEP.new(pub_key2)
+    public_key2 = RSA.import_key(client.get_key(user2_id))
+    cipher = PKCS1_OAEP.new(public_key2)
     encrypted1to2 = cipher.encrypt(message1to2)
     client.send_binary_message(user2_id, encrypted1to2)
     
@@ -69,8 +69,8 @@ def task2a_bidirectional_communication(user1_id, user2_id):
     print(f"User2 received: {decrypted.decode()}")
     
     message2to1 = b"Hello back from User2 to User1"
-    pub_key1 = RSA.import_key(client.get_key(user1_id))
-    cipher = PKCS1_OAEP.new(pub_key1)
+    public_key1 = RSA.import_key(client.get_key(user1_id))
+    cipher = PKCS1_OAEP.new(public_key1)
     encrypted2to1 = cipher.encrypt(message2to1)
     client.send_binary_message(user1_id, encrypted2to1)
     
