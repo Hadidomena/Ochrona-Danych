@@ -2,6 +2,8 @@ from Cryptodome.PublicKey import RSA
 from Cryptodome.Cipher import PKCS1_OAEP
 from Cryptodome.Signature import pkcs1_15
 from Cryptodome.Hash import SHA256
+from Cryptodome.Cipher import AES
+from Cryptodome.Random import get_random_bytes
 import sys, requests, base64, json, time
 
 sys.path.append('./rsa_server_client_with_keys/rsa_server_client_with_keys/client')
@@ -84,9 +86,6 @@ def task2a_bidirectional_communication(user1_id, user2_id):
     print(f"User1 received: {decrypted.decode()}")
 
 
-from Cryptodome.Cipher import AES
-from Cryptodome.Random import get_random_bytes
-
 def task2b_signed_communication(user1_id, user2_id):
     client = Client('http://localhost:5555')
     key1 = RSA.generate(2048)
@@ -146,39 +145,39 @@ def task2b_signed_communication(user1_id, user2_id):
 
 def main():
     results = []
-    tasks = input("Input tasks which should be done as name of tasks separated by spaces").split(" ")
+    tasks = input("Input tasks which should be done as name of tasks separated by spaces: ").split(" ")
     if "1" in tasks:
-        print("\n=== Task 1: Send to deadbeef ===")
+        print("\nTask 1: Send to deadbeef")
         start = time.time()
         try:
-            print("--- Correct encryption ---")
+            print("Correct encryption")
             task1_correct_encryption()
-            print("\n--- Incorrect encryption ---")
+            print("\nIncorrect encryption")
             task1_incorrect_encryption()
             t1 = time.time() - start
             results.append(f"Task 1: SUCCESS ({t1:.2f}s)")
         except Exception as e:
-            results.append(f"Task 1: FAILED - {e}")
+            results.append(f"Task 1: FAIL - {e}")
     
     if "2A" in tasks:
-        print("\n=== Task 2A: Bidirectional communication ===")
+        print("\nTask 2A: Bidirectional communication")
         start = time.time()
         try:
             task2a_bidirectional_communication('alice', 'bob')
             t2a = time.time() - start
             results.append(f"Task 2A: SUCCESS ({t2a:.2f}s)")
         except Exception as e:
-            results.append(f"Task 2A: FAILED - {e}")
+            results.append(f"Task 2A: FAIL - {e}")
     
     if "2B" in tasks:
-        print("\n=== Task 2B: Signed communication ===")
+        print("\nTask 2B: Signed communication")
         start = time.time()
         try:
             task2b_signed_communication('carol', 'dave')
             t2b = time.time() - start
             results.append(f"Task 2B: SUCCESS ({t2b:.2f}s)")
         except Exception as e:
-            results.append(f"Task 2B: FAILED - {e}")
+            results.append(f"Task 2B: FAIL - {e}")
     
     with open("results.txt", "w") as f:
         f.write("\n".join(results))
