@@ -49,7 +49,6 @@ COMMON_BIGRAMS = {
 
 
 def smart_frequency_attack(language):
-    """Single-pass frequency attack using most frequent characters"""
     alphabet = ALPHABETS[language]
     expected_freq = CHAR_FREQUENCIES[language]
     
@@ -114,12 +113,9 @@ def bigram_attack(language):
         shift_scores.append((shift, bigram_score, shifted_bigrams[:3]))
     shift_scores.sort(key=lambda x: x[1], reverse=True)
     best_shift, best_score, best_patterns = shift_scores[0]
-    for i, (shift, score, patterns) in enumerate(shift_scores[:3]):
-        marker = " ← BEST" if i == 0 else ""
     
     return best_shift, best_score
 def calculate_entropy(data):
-    """Calculate Shannon entropy of data"""
     if not data:
         return 0
         
@@ -136,7 +132,6 @@ def calculate_entropy(data):
         
     return entropy
 def is_likely_plaintext(data, entropy_threshold=7.0):
-    """Check if decrypted data looks like plaintext based on entropy"""
     if not data:
         return False
         
@@ -153,10 +148,8 @@ def is_likely_plaintext(data, entropy_threshold=7.0):
         return False
     
 def secondPart():
-    """Perform brute force attacks on RC4 encrypted files using entropy verification"""
     
     def rc4_decrypt(ciphertext, key):
-        """Decrypt data using RC4"""
         if ARC4 is None:
             return None
         try:
@@ -166,9 +159,7 @@ def secondPart():
             return None
     
     
-    
     def brute_force_rc4(filename):
-        """Brute force RC4 encrypted file with 3-character keys [a-z]{3}"""
         try:
             with open(filename, 'rb') as f:
                 ciphertext = f.read()
@@ -251,7 +242,6 @@ def cyclicalCipher(language):
     alphabet = ALPHABETS[language]
     alphabet_size = len(alphabet)
     
-    
     move = random.randint(1, alphabet_size - 1)
     
     text = ""
@@ -279,7 +269,6 @@ def cyclicalCipher(language):
 
 
 def firstPart():
-    """Encrypt texts from texts directory and break them using multiple methods"""
     languages = ['english', 'french', 'polish']
     
     actual_shifts = {}
@@ -337,11 +326,8 @@ def firstPart():
             summary.append((lang, shift, float(best['Score'])))
     
     return summary
-    
-    return results
 
 def calculate_frequency(text, alphabet):
-    """Calculate character frequencies in text as percentages"""
     char_count = {}
     total_alphabet_chars = 0
     
@@ -361,7 +347,6 @@ def calculate_frequency(text, alphabet):
 
 
 def chi_squared_test(observed_freq, expected_freq, alphabet):
-    """Calculate chi-squared statistic to measure how well frequencies match"""
     chi_squared = 0.0
     
     for char in alphabet:
@@ -377,7 +362,6 @@ def chi_squared_test(observed_freq, expected_freq, alphabet):
 
 
 def decrypt_with_shift(encrypted_text, shift, alphabet):
-    """Decrypt text using a specific shift value"""
     alphabet_size = len(alphabet)
     decrypted = ""
     
@@ -393,7 +377,6 @@ def decrypt_with_shift(encrypted_text, shift, alphabet):
 
 
 def frequency_attack(language):
-    """Perform frequency analysis attack on encrypted text"""
     alphabet = ALPHABETS[language]
     expected_freq = CHAR_FREQUENCIES[language]
     alphabet_size = len(alphabet)
@@ -426,7 +409,6 @@ def frequency_attack(language):
 
 
 def main():
-    """Main function to run both parts of the cryptanalysis assignment"""
     results = []
     
     print("\nPART 1: Cyclical Cipher Analysis")

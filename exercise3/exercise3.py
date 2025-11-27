@@ -5,7 +5,6 @@ import time
 from passlib.hash import md5_crypt, sha256_crypt
 
 def find_md5_collision():
-    """Znajdź dwa hasła z identycznymi pierwszymi 6 znakami MD5"""
     seen = {}
     counter = 0
     
@@ -30,7 +29,6 @@ def find_md5_collision():
             print(f"Sprawdzono {counter} hasel...")
 
 def crack_argon2(hash_string, passwords):
-    """Specjalna funkcja dla Argon2"""
     try:
         from argon2.low_level import hash_secret_raw, Type
         
@@ -76,7 +74,6 @@ def crack_argon2(hash_string, passwords):
         return None
 
 def crack_hash(hash_string, passwords, salt_suffix=False):
-    """Zlam hash uzywajac slownika"""
     print(f"\n=== Atak na hash ===")
     print(f"Hash: {hash_string[:60]}...")
     
@@ -146,7 +143,6 @@ def crack_hash(hash_string, passwords, salt_suffix=False):
     return None
 
 def main():
-    """Main function to run both parts of the cryptanalysis assignment"""
     output_results = []
     
     print("=== Exercise 3: MD5 Collisions & Password Cracking ===\n")
