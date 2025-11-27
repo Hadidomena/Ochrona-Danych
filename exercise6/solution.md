@@ -1,4 +1,6 @@
 # First Part
+both correct example of usage, and incorrect example of usage, i wanted to see diff on the first glance
+**Output**
 ```
 Correct encryption
 Correct: Decrypted response from deadbeef: Hello deadbeef, this is a secure message!
@@ -8,6 +10,7 @@ Incorrect: Expected failure - 400: Ciphertext with incorrect length.
 ```
 # Second Part
 ## Task A
+**Output**
 ```
 SUCCESS: Dodano klucz dla: alice
 SUCCESS: Dodano klucz dla: bob
@@ -17,7 +20,8 @@ SUCCESS: Dodano wiadomość dla: alice
 User1 received: Hello back from User2 to User1
 ```
 ## Task B
-to fullfill task, 
+to fullfill task, signature needed to be added
+**Output**
 ```
 SUCCESS: Dodano klucz dla: carol
 SUCCESS: Dodano klucz dla: dave

@@ -8,9 +8,9 @@ import sys, requests, base64, json, time
 
 sys.path.append('./rsa_server_client_with_keys/rsa_server_client_with_keys/client')
 from client import Client
+client = Client('http://localhost:5555')
 
 def task1_correct_encryption():
-    client = Client('http://localhost:5555')
     public_key_pem = client.get_key('deadbeef')
     public_key = RSA.import_key(public_key_pem)
     message = b"Hello deadbeef, this is a secure message!"
@@ -30,7 +30,6 @@ def task1_correct_encryption():
         raise Exception(f"FAIL({response.status_code}): {response.text}")
 
 def task1_incorrect_encryption():
-    client = Client('http://localhost:5555')
     wrong_key = RSA.generate(2048)
     message = b"This message is encrypted with wrong key!"
     cipher = PKCS1_OAEP.new(wrong_key.publickey())
@@ -51,7 +50,6 @@ def task1_incorrect_encryption():
 
 
 def task2a_bidirectional_communication(user1_id, user2_id):
-    client = Client('http://localhost:5555')
     key1 = RSA.generate(2048)
     key2 = RSA.generate(2048)
     public_key1 = key1.publickey().export_key()
@@ -83,7 +81,6 @@ def task2a_bidirectional_communication(user1_id, user2_id):
 
 
 def task2b_signed_communication(user1_id, user2_id):
-    client = Client('http://localhost:5555')
     key1 = RSA.generate(2048)
     key2 = RSA.generate(2048)
     public_key1 = key1.publickey().export_key()
@@ -137,7 +134,6 @@ def task2b_signed_communication(user1_id, user2_id):
         print(f"User2 received verified message: {received_message.decode()}")
     except (ValueError, TypeError):
         print("Signature verification FAILED")
-
 
 def main():
     results = []
