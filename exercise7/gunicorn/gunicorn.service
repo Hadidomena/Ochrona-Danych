@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn for exercise7 Flask app
+After=network.target
+
+[Service]
+User=flaskuser
+Group=www-data
+WorkingDirectory=/home/youruser/Documents/Workspace/'Ochrona Danych'/exercise7/app
+ExecStart=/usr/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 wsgi:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
