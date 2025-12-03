@@ -2,4 +2,5 @@ venv
 .vscode
 .github
 __pycache__
-*/ssl
+exercise7/ssl/*.key
+exercise7/ssl/*.crt
