@@ -4,3 +4,4 @@ venv
 __pycache__
 exercise7/ssl/*.key
 exercise7/ssl/*.crt
+exercise7/logs
